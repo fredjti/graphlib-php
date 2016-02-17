@@ -56,7 +56,7 @@
 				$source = $endPoints[0];
 				$target = $endPoints[1];
 
-				if( !($edge->contains($souce) && $edge->contains($target)) )
+				if( !($edge->contains($source) && $edge->contains($target)) )
 					$h->addEdge($source, $target);
 	    	}    	
 
@@ -75,23 +75,5 @@
 
 		    return null;
 	    }
-
-	    public static function ArestasArvore(Graph $g){
-	        
-	        $allVertices = $g->getVertexSet();
-
-	        
-	        
-	            if($allVertices == 1){
-	                
-	                    return 0;
-	            }
-	            else $degree = $g->degreeOf($vertex);
-	        
-	        
-	        return (1+ ArestasArvore());
-	    }
-
-
 	}
 ?>
