@@ -18,6 +18,11 @@
 	    public function setId($id){
 	        $this->id = $id;
 	    }
+	    public function equals(Vertex $vertex){
+	    	if($this->id == $vertex->getId())
+	    		return true;
+	    	return false;
+	    }
 	}
 
 ?>

@@ -75,5 +75,60 @@
 
 		    return null;
 	    }
+
+	    public static function edgeTree(Graph $g){
+	        
+	        $allVertices = $g->getVertexSet();
+
+			if(count($allVertices) == 1 || count($allVertices) == 0){
+	        	return 0;
+	        }
+	        else{
+	            $vertex = self::degreeOneVertex($g); 
+	            $h = self::graphMinusVertex($g, $vertex);
+	            return ( 1 + self::edgeTree($h) );
+	        } 
+	       	                
+	    }
+
+	    public static function degreeOneVertex(Graph $g){
+
+	    	$allVertices = $g->getVertexSet();
+	    	
+	    	foreach ($allVertices as $vertex) {
+	    		if($g->degreeOf($vertex) == 1){
+	    			return $vertex;
+	    		}
+	    	}
+
+	    	return null;	
+	    	
+	    }
+
+	    public static function graphMinusVertex(Graph $g, Vertex $v){
+
+	    	$newName = $g->getName()." - v";
+	    	$h = new Graph($newName);
+
+	    	$allVertices = $g->getVertexSet();	    	
+	    	
+	    	foreach ($allVertices as $vertex) {
+				if( ! $vertex->equals($v) )
+					$h->addVertex($vertex);
+	    	}    	
+
+	    	$allEdges = $g->getEdgeSet();
+
+	    	foreach ($allEdges as $edge) {
+	    		$endPoints = $edge->getEndPoints();
+				$source = $endPoints[0];
+				$target = $endPoints[1];
+
+				if( !($v->equals($source) || $v->equals($target)) )
+					$h->addEdge($source, $target);
+	    	}
+
+	    	return $h;
+	    }	
 	}
 ?>
